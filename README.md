@@ -52,14 +52,24 @@ I also don't meet any of the "Nice to Have" requirements. As lack of experience 
 
 # How to run
 - Clone the repository
-    
+
 - Run the backend server:
     - Navigate to the `backend` directory
+    - Create virtual environment `python -m venv .venv`
     - Run `pip install -r requirements.txt` to install the required packages
+    - Navigate to `core` directory
+    - Create .env file with these field:
+        - WEATHER_API_KEY="your api key from https://www.weatherapi.com/"
+        - WEATHER_API_BASE_URL=http://api.weatherapi.com/v1
+        - WEATHER_API_LANGUAGE=vi
+        - SECRET_KEY="django secret key"
     - Run `python manage.py runserver` to start the server
+
 - Run the frontend server:
     - Navigate to the `frontend` directory
     - Run `npm install` to install the required packages
+    - Create .env file with:
+        - VITE_BASE_URL = "http://localhost:8000"
     - Run `npm start` to start the server
 
 
