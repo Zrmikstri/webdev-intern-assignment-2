@@ -7,13 +7,24 @@ from rest_framework.response import Response
 
 @api_view(["GET"])
 def weather(request):
+    if len(request.query_params) == 0:
+        return Response({"error": "No query parameters provided."})
+
     base_url = config("WEATHER_API_BASE_URL")
     key = config("WEATHER_API_KEY")
     language = config("WEATHER_API_LANGUAGE")
 
-    # response = requests.get(
-    #     f"{base_url}/current.json?key={key}&q=auto:ip&lang={language}"
-    # )
+    q = request.query_params.get("q")
+    days = request.query_params.get("days")
 
-    # return Response(response.json())
-    # return Response({"weather": "sunny"})
+    if days == 0:
+        response = requests.get(
+            f"{base_url}/current.json?key={key}&q={q}&lang={language}"
+        )
+    else:
+        response = requests.get(
+            f"{base_url}/forecast.json?key={key}&q={q}&days={int(days) + 1}&lang={language}"
+        )
+
+    return Response(response.json())
+    # return Response(forecast)

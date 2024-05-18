@@ -17,8 +17,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from dj_rest_auth.registration.views import VerifyEmailView
 
 urlpatterns = [
-    path("", include("weather.urls")),
+    path("weather/", include("weather.urls")),
     path("admin/", admin.site.urls),
+    path("api/auth/", include("authentication.urls")),
 ]
